@@ -1,7 +1,66 @@
-Foto's.
+Foto's en logo.
 
 IN GEBRUIK
+  coco-logo-wit.png                      het CO&CO-beeldmerk in de menubalk
+     Eén bestand van 92 x 78 px (3,3 KB), in de balk 26 px hoog getoond.
+     26 px is de grens: de regel met het woord BIERFUNDING is 30 px hoog, dus
+     alles tot 30 px past erin zonder dat de balk hoger wordt. Groter maken
+     betekent een hogere balk op elke pagina.
+     LET OP: dit is een UITSNEDE van "Logo ondertitel wit.png" — alleen het
+     beeldmerk C&O, zonder de regel CRAFT BEERS eronder. Die ondertitel is op
+     26 px een grijze veeg en maakt het merkteken onrustiger in plaats van
+     duidelijker. De uitsnede loopt door een lege strook van 48 px tussen het
+     beeldmerk en de ondertitel, dus er is niets vervormd of afgesneden.
+     De alt-tekst is met opzet leeg: logo en woord zijn samen één link.
+
   proefglazen-800 / -1200 / -1800        breedbeeld bovenaan de homepage
+     Bron sinds ronde 6: "proefglazen v2.jpg" (2754 x 1536) — zes GEVULDE
+     glazen. De vorige foto (header.jpg, lege glazen) is vervangen; de
+     bestandsnamen van de varianten zijn hetzelfde gebleven, dus de HTML is
+     daarvoor niet aangeraakt.
+     LET OP 1: deze foto wordt bijgesneden. Hij is maximaal 300 px hoog,
+     anders duwt hij de homepage onder de vouw. Verticaal zie je alleen de
+     middenband; op een telefoon gaat er ook links en rechts een strook af
+     (5% per kant op 390 px, 10% op 320 px). Kies een foto waarvan het
+     onderwerp in het midden zit, verticaal en horizontaal.
+     LET OP 2: de titel ligt over de onderste strook van deze foto, met een
+     donker verloop eronder. Dat zijn twee regels: groot "Bierfunding" en
+     daaronder kleiner "Welk bier brouwen we hierna?". Zet daar niets
+     belangrijks neer: de onderste 35 tot 60% gaat schuil onder de titel en
+     het verloop. Een rustig vlak (tafelblad, muur) is daar precies goed.
+     Zie README.md stap 3.
+     LET OP 3: de uitsnede staat op 50% (object-position in css/site.css) en
+     dat is geen smaakkeuze. De glazen lopen in de bronfoto van y 372 (schuim)
+     tot y 1168 (glasvoeten) = 796 beeldpunten; op een laptop van 1280 x 633 is
+     het zichtbare venster 802 beeldpunten hoog. Zes over. Bij 52% snijdt de
+     schuimkraag af, bij 48% de glasvoeten. Bij de vorige foto met lege glazen
+     stond dit op 54% — lege glazen zijn lager. Vervang je de foto, meet dit
+     dan opnieuw.
+     LET OP 4: op een venster lager dan ongeveer 650 px krimpt het beeldblok
+     (46vh-regel) en past het glas er niet meer in. Op 1280 x 520 valt de
+     schuimkraag bovenaan weg en zie je onderaan alleen de stelen. Dat is een
+     bewuste ruil: een hoger beeldblok duwt op zo'n venster de knop onder de
+     vouw. Met object-position valt er niets aan te doen — 50% geeft aan beide
+     kanten evenveel weg. Vanaf 1280 x 633 is het glas compleet.
+
+  brouwerij-480 / -800 / -1200           de eigen brouwerij in Wijthmen
+     Staat op over-ons.html bij "De brouwerij in Wijthmen", naast de tekst.
+     Uitsnede 3:2 uit brouwerij-wythem.jpeg (8064 x 6048): de bovenste 576
+     beeldpunten (plafond) en de onderste 96 zijn eraf. Verder is er niets
+     bijgesneden — het gistvat vooraan blijft heel, en dat is precies de
+     grens van wat eraf kan.
+
+  proefavond-480 / -800 / -1200 / -1800  sfeerbeeld op hoe-het-werkt.html
+     Uitsnede uit hoe-het-werkt.jpg. LET OP: dit is NIET Wijthmen, net zomin
+     als co_en_co.jpeg (die is bij Brouwerij Allema gemaakt). Het bijschrift
+     zegt dat erbij; zet dus ook geen tekst op de site die suggereert dat dit
+     de eigen brouwerij is.
+     De uitsnede is bewust: in het origineel ligt vooraan op tafel een
+     krijtbord met "Zwolse Speciaalbier Proeverij" en zes bierstijlen. Dat is
+     een ander evenement en Bierfunding heeft er vier. Het bord ligt onder de
+     onderrand van de uitsnede. Vervang je deze foto, controleer dan opnieuw
+     of er geen tekst in beeld staat die iets anders belooft.
+
   coen-coers-320 / -480 / -640           Coen & Coers (homepage + over-ons)
   kandidaat-1-320 / -480 / -640 / -960   glas kandidaat 1 (home + kandidaten)
   kandidaat-2-... t/m kandidaat-4-...    idem voor 2, 3 en 4
@@ -11,15 +70,24 @@ IN GEBRUIK
   Kleurkoppeling nu: 1 goudblond, 2 bijna zwart, 3 amber, 4 troebel lichtgeel.
   Pas de alt-teksten in de HTML aan als de nieuwe foto's anders zijn.
 
-NOG PLAATSHOUDER — hier staat nu een gekleurd vlak met een beschrijving
-  avond-800 / -1200 / -1800              de proeftafel (hoe-het-werkt)
-  installatie-800 / -1200 / -1800        ketels en koelcel (over-ons)
+GEEN PLAATSHOUDERS MEER — elke fotoplek op de site heeft nu een echte foto.
 
-Altijd .jpg, altijd drie breedtes, grootste variant onder 200 KB.
-Het commando staat in README.md, stap 3.
+Altijd .jpg voor foto's, altijd drie of vier breedtes, grootste variant onder
+200 KB. Het commando staat in README.md, stap 3.
 
-ORIGINELEN — niet door de site gebruikt, samen 20 MB
-  header.jpg      bron van proefglazen-*
-  co_en_co.jpeg   bron van coen-coers-*
-  bier-1..4.jpg   bron van kandidaat-1..4-*
-Je mag ze uit de repo halen; bewaar ze dan wel ergens anders.
+ORIGINELEN — niet door de site gebruikt, staan in .gitignore
+  proefglazen v2.jpg        bron van proefglazen-*        3,6 MB
+     Het origineel van Frits, met spatie in de naam. Er staat een kopie
+     naast onder de naam proefglazen-v2.jpg; die is gebruikt om de drie
+     varianten te maken (sips struikelt niet over de spatie, maar een
+     bestandsnaam zonder spatie scheelt aanhalingstekens in elk commando).
+     Kwaliteitsinstellingen: 800 op formatOptions 62, 1200 op 56, 1800 op 48.
+     Deze foto comprimeert zwaarder dan de lege glazen — meer kleur en meer
+     detail — dus de getallen liggen lager dan bij de vorige set.
+  header.jpg                VORIGE header, lege glazen    3,2 MB
+  co_en_co.jpeg             bron van coen-coers-*         4,5 MB
+  bier-1..4.jpg             bron van kandidaat-1..4-*     12 MB samen
+  brouwerij-wythem.jpeg     bron van brouwerij-*          7,0 MB
+  hoe-het-werkt.jpg         bron van proefavond-*         3,4 MB
+  Logo ondertitel wit.png   bron van coco-logo-wit.png    36 KB
+Ze blijven lokaal staan; bewaar ze ergens buiten de repo als je ze weggooit.

@@ -6,7 +6,7 @@
 <title>Pagina niet gevonden — Bierfunding</title>
 <meta name="robots" content="noindex">
 <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/css/site.css?v=1">
+<link rel="stylesheet" href="/css/site.css?v=6">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#1b3a5c">
 </head>
@@ -16,7 +16,16 @@
 
 <header class="masthead">
   <div class="wrap masthead__inner">
-    <a class="brand" href="/">BIERFUNDING</a>
+    <a class="brand" href="/">
+      <!-- Het CO&CO-beeldmerk. alt="" met opzet: logo en woord vormen samen
+           één link naar de homepage, en die heeft één toegankelijke naam
+           nodig — "BIERFUNDING". Zou het logo een eigen alt-tekst krijgen,
+           dan leest een schermlezer op élke pagina "CO&CO Craft Beers
+           Bierfunding, link". Dat CO&CO erachter zit staat in de voettekst
+           van elke pagina in gewone tekst. -->
+      <img class="brand__logo" src="/img/coco-logo-wit.png" width="92" height="78" alt="">
+      <span>BIERFUNDING</span>
+    </a>
     <nav class="nav" aria-label="Hoofdmenu">
       <ul>
         <li><a href="/hoe-het-werkt.html">Hoe het werkt</a></li>

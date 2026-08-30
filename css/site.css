@@ -197,6 +197,8 @@ strong { font-weight: 700; color: var(--ink); }
   padding-block: 10px;
 }
 
+/* Woordmerk in de balk: het CO&CO-beeldmerk plus het woord BIERFUNDING,
+   samen één link naar de homepage.                                        */
 .brand {
   font-size: 1.1875rem;
   font-weight: 800;
@@ -204,9 +206,32 @@ strong { font-weight: 700; color: var(--ink); }
   color: #fff;
   text-decoration: none;
   padding-block: 10px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 .brand:hover { color: var(--amber); }
+
+/* Het logo is 26 px hoog en dat is geen willekeurig getal: de regel waarin
+   het woord BIERFUNDING staat is 30 px hoog, en zolang het logo daar binnen
+   blijft verandert de hoogte van de menubalk niet. Nagemeten: 62 px op een
+   breed scherm, 70 px tussen 700 en 768 px, 114 px waar het menu onder de
+   naam valt en 158 px op een telefoon — precies dezelfde getallen als
+   zonder logo. Wordt het logo groter dan 30 px, dán groeit de balk.
+
+   Eén PNG op 92 x 78 (3,3 KB) in plaats van een srcset met 1x en 2x: op
+   deze maat is het verschil een paar honderd bytes, en één bestand kan niet
+   de verkeerde variant serveren. De breedte- en hoogte-attributen in de HTML
+   houden de verhouding vast, zodat er niets verspringt tijdens het laden.
+   De bron is het volledige logo met "CRAFT BEERS" eronder; die ondertitel
+   is op 26 px een grijze veeg en staat daarom niet in deze uitsnede. Zie
+   img/LEESMIJ.txt.                                                        */
+.brand__logo {
+  height: 26px;
+  width: auto;
+  display: block;
+  flex: none;
+}
 
 .nav ul {
   display: flex;
@@ -309,10 +334,206 @@ strong { font-weight: 700; color: var(--ink); }
   display: block;
 }
 
-.shot--hero  { aspect-ratio: 16 / 7; }
 .shot--wide  { aspect-ratio: 16 / 8; }
 .shot--glass { aspect-ratio: 1 / 1; }
 .shot--duo   { aspect-ratio: 3 / 4; max-width: 320px; }
+
+/* Een breedbeeldfoto die van rand tot rand loopt (nu: de proefavond midden op
+   "Hoe het werkt"). Boven 1000 px blijft hij in dezelfde kolom als de tekst —
+   dezelfde grens als de headerfoto op de homepage, en om dezelfde reden: bij
+   een foto die met de schermbreedte meegroeit wordt hij op een breed scherm
+   een scherm in plaats van een band. Gemeten: zonder deze grens is hij op
+   1920 px 747 px hoog, met de grens 389 px. Onder 1000 px loopt hij wél door
+   tot de rand; alleen het bijschrift krijgt daar de paginamarge, anders
+   plakt de tekst tegen de schermrand.                                       */
+.shot--band { max-width: var(--measure); margin-inline: auto; }
+.shot--band figcaption { padding-inline: var(--gutter); }
+
+/* --- De titel over de foto bovenaan de homepage -----------------------------
+   In het beeld staan twee regels: de <h1> "Bierfunding" (groot) en daaronder
+   de ondertitel "Welk bier brouwen we hierna?" (kleiner). De uitleg en de
+   knop staan eronder. Grote, vette tekst heeft aan 3:1 contrast genoeg; de
+   kleinere ondertitel is gewone tekst en moet 4,5:1 halen — en dat is over
+   een foto met wisselend licht niet te garanderen zonder verloop.
+
+   DRIE DINGEN HOUDEN DIT OVEREIND:
+
+   1. HET VERLOOP IS DE GARANTIE, NIET DE FOTO. Onder de tekst staat een
+      donker verloop van 68-80% dekking. Zelfs als daar zuiver wit onder zou
+      liggen, haalt de titel nog 6,27:1 en de ondertitel 7,84:1. Op de foto
+      zelf, per beeldpunt gemeten op 23 schermformaten x 1x en 2x (RONDE 6,
+      opnieuw gemeten op de nieuwe foto met gevulde glazen, per regel apart):
+      laagste beeldpunt 6,37:1 (titel, eis 3:1) en 8,06:1 (ondertitel, eis
+      4,5:1), mediaan 9,4-13,2:1. De leesbaarheid hangt dus niet af van
+      de uitsnede, de schermbreedte of een toekomstige vervangende foto.
+      Boven de tekst dooft het verloop uit over 0,8 × de titelmaat, dus de
+      glazen zelf blijven onaangetast; het verloop ligt over de tafel. Het
+      bedekt 35-60% van de foto.
+   2. DE HOOGTE STAAT IN REM, NIET IN PX. Zet iemand zijn lettergrootte
+      groter, dan groeit het beeldblok mee en blijft de tekst erbinnen passen.
+      62vw houdt de verhouding op een telefoon in de buurt van het origineel;
+      max. 18,75rem (300 px) is de maat uit het goedgekeurde ontwerp, en de
+      46vh-grens houdt de knop op een laag venster in het eerste scherm.
+   3. HET BLOK HEEFT EEN DONKERE ACHTERGROND. Laadt de foto niet, of groeit
+      de tekst onverwacht buiten het beeld, dan staat witte tekst nog steeds
+      op marineblauw en niet op een crème vlak. Geen enkele situatie waarin
+      de titel onleesbaar wordt.
+
+   Boven 1000 px loopt het beeld niet door tot de schermrand maar staat het
+   in dezelfde kolom als de tekst: bij een vaste hoogte wordt de uitsnede
+   anders steeds smaller en zouden de glazen doormidden gesneden worden.
+   De uitsnede ligt op het midden (50%), want daar staan de glazen. RONDE 6:
+   dat was 54%, afgestemd op de lege glazen van de vorige foto. De gevulde
+   glazen zijn hoger — de schuimkraag van het middelste glas steekt boven de
+   rand uit. Gemeten in de bronfoto (2754 x 1536): de glazen lopen van y 372
+   (schuim) tot y 1168 (glasvoet), samen 796 beeldpunten. Op een laptop van
+   1280 x 633 is het zichtbare venster 802 beeldpunten hoog — zes over. De
+   uitsnede kan daar dus maar op één plek staan: 50%. Bij 52% wordt de
+   schuimkraag afgesneden, bij 48% de glasvoeten. Beide bekeken, niet
+   beredeneerd.
+
+   EN DAAR ZIT EEN GRENS AAN, die niet met object-position te repareren is.
+   Op een venster lager dan ongeveer 650 px wint de 46vh-regel het van de
+   300 px en krimpt het beeldblok: op 1280 x 520 is het 239 px, en dan pást
+   het glas er niet meer in. Nagekeken op vergroting: op 1280 x 520 valt de
+   schuimkraag bovenaan weg en zijn onderaan alleen de stelen nog te zien,
+   niet de voeten. Dat is een bewuste ruil en geen fout — het alternatief is
+   een hoger beeldblok, en dat duwt de knop op zo'n venster onder de vouw,
+   precies wat ronde 2 heeft rechtgezet. 50% blijft ook daar de beste stand:
+   het midden van de glazen valt samen met het midden van de foto, dus er
+   gaat aan beide kanten evenveel af. Wie dit wil verhelpen moet de 46vh-
+   regel aanpassen, niet de uitsnede. Vanaf 1280 x 633 en op alle telefoon-
+   breedtes is het glas compleet: op een telefoon wordt er alleen links en
+   rechts een strook af gesneden, verticaal is de foto daar heel. */
+
+.hero {
+  position: relative;
+  display: grid;
+  /* Eén rij, precies zo hoog als het blok zelf. Zonder minmax(0, 1fr) leidt
+     de browser de rijhoogte af uit de natuurlijke hoogte van de foto (558 px
+     op een breed scherm); de kop wordt dan onderaan díé rij uitgelijnd en valt
+     buiten beeld. Gemeten: zonder deze regel is de titel onzichtbaar.    */
+  grid-template-rows: minmax(0, 1fr);
+  width: 100%;
+  height: min(clamp(13.75rem, 62vw, 18.75rem), max(46vh, 13.125rem));
+  background: var(--ink);        /* vangnet, zie punt 3 hierboven          */
+  overflow: hidden;
+}
+
+.hero > * { grid-area: 1 / 1; min-width: 0; }
+
+.hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* De tekst in het beeld: de titel als <h1>, de vraag als ondertitel eronder.
+   BEIDE regels liggen over de foto — niet alleen de titel. Zou de vraag
+   eronder vallen, dan duwt hij de uitleg en de knop weer omlaag, precies de
+   fout die ronde 2 en 3 hebben rechtgezet.
+
+   RONDE 5 KEERT DE VERHOUDING OM. Tot ronde 4 was "Bierfunding" de kleine
+   aanhef en de vraag de grote regel. Frits wil het andersom: de titel groot,
+   de vraag kleiner eronder. Dat verandert drie dingen tegelijk, en ze hangen
+   samen:
+
+   1. DE GROTE REGEL LIGT NU BOVENAAN, waar het verloop het zwakst is. Het
+      strengste punt van de meting verschuift dus mee. Er is opnieuw per
+      beeldpunt gemeten, per regel apart — niets uit ronde 4 is overgenomen.
+   2. DE KLEINE REGEL IS NU DE ONDERSTE, en die moet als lopende tekst 4,5:1
+      halen in plaats van de 3:1 van grote tekst. Hij ligt daar waar het
+      verloop op volle sterkte is, dus dat komt goed uit.
+   3. HET VERLOOP HANGT AAN DE TITEL, niet meer aan de vraag: --hero-title is
+      één bron voor de lettergrootte van de <h1> én voor de lengte waarover
+      het verloop uitdooft. Zou de titel groeien, dan groeit het verloop mee
+      en blijft de bovenste regel gedekt.
+
+   De uitdoof-lengte is 0,8 × de titel (was 1,1 × de vraag). Korter mag hier,
+   omdat de fade-afstand aan een gróter getal hangt: 0,8 × 60 px is in
+   absolute pixels meer dan 1,1 × 56 px scheelt. Zo blijft de dekking van de
+   foto gelijk aan ronde 4 terwijl de bovenste regel hoger in beeld staat.
+
+   "Bierfunding" is één woord van elf tekens; dat past op elke gemeten
+   breedte op één regel, ook op 320 px. De vraag is de langste van de twee
+   en bepaalt daarom de ondergrens van de ondertitel-maat.                  */
+
+.hero__text {
+  /* Eén bron voor de titelmaat én voor de lengte van het verloop.         */
+  --hero-title: clamp(2.125rem, 6.2vw, 3.75rem);   /* 34 → 60 px           */
+  --hero-sub:   clamp(1.1875rem, 2.2vw, 1.5rem);   /* 19 → 24 px           */
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  padding: 0 var(--gutter) clamp(14px, 3vw, 26px);
+  color: #fff;
+}
+
+/* De titel. Archivo 800 in gewone schrijfwijze — niet de kapitaal van de
+   labels, en niet het smalle Archivo Narrow van het woordmerk in de
+   menubalk. Dat is bewust: zo staat er twee keer hetzelfde woord op het
+   scherm, maar in twee duidelijk verschillende gedaanten en met de foto
+   ertussen.                                                                */
+.hero__title {
+  margin: 0 0 clamp(4px, 0.9vw, 10px);
+  color: #fff;
+  font-size: var(--hero-title);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+/* De ondertitel. Een <p>, geen kop: hij hoort bij de <h1> en kondigt geen
+   sectie aan. Kleiner dan de titel, maar niet klein: dit is nog steeds de
+   zin die het concept verkoopt, dus geen bijschrift-maat. 19 px op een
+   telefoon, 24 px op een breed scherm — ruim boven de 15 px-ondergrens van
+   dit ontwerp, en op elke gemeten breedte op één regel.                    */
+.hero__sub {
+  margin: 0;
+  max-width: none;
+  font-size: var(--hero-sub);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+/* Het leesbaarheidsverloop. Het hangt aan het hele tekstblok en dooft naar
+   boven uit over 0,8 × de titelmaat. Ter hoogte van de bovenkant van de
+   titel is het verloop al op volle sterkte — dat is het zwakste punt en
+   daar is per beeldpunt gemeten.                                           */
+.hero__text::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--hero-title) * -0.8) 0 0;
+  z-index: -1;
+  background: linear-gradient(to bottom,
+              rgba(11, 24, 38, 0)    0,
+              rgba(11, 24, 38, 0.68) calc(var(--hero-title) * 0.8),
+              rgba(11, 24, 38, 0.80) 100%);
+}
+
+@media (min-width: 1000px) {
+  .hero { max-width: var(--measure); margin-inline: auto; }
+}
+
+/* Onder 375 px is de breedte 320 px min twee keer 20 px marge = 280 px. De
+   ondertitel past daar bij 19 px net niet op één regel; één stap kleiner
+   wel. De titel kan er wél blijven staan — één woord van elf tekens.
+   Gemeten op 320 en 360 px.                                                */
+@media (max-width: 374px) {
+  .hero__text { --hero-sub: 1.0625rem; }   /* 17 px */
+}
+
+/* Hoog-contrastmodus van Windows. Daar wordt de tekstkleur door het systeem
+   bepaald en zou witte tekst zwart kunnen worden — boven op een foto. We
+   halen daarom het verloop weg en zetten de tekst op een systeemvlak.     */
+@media (forced-colors: active) {
+  .hero__text { background: Canvas; color: CanvasText; }
+  .hero__title, .hero__sub { color: CanvasText; }
+  .hero__text::before { display: none; }
+}
 
 /* --- Plaatshouders voor tekst ----------------------------------------------
    Alles wat Frits nog moet invullen staat tussen rechte haken. De haken
@@ -552,7 +773,6 @@ strong { font-weight: 700; color: var(--ink); }
 
 @media (min-width: 560px) {
   .grid--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .shot--hero { aspect-ratio: 16 / 6; }
 }
 
 @media (min-width: 760px) {
@@ -572,14 +792,14 @@ strong { font-weight: 700; color: var(--ink); }
 
   .split--hero { grid-template-columns: minmax(0, 1fr) 290px; gap: 52px; }
   .split--duo  { grid-template-columns: 300px minmax(0, 1fr); gap: 40px; align-items: center; }
+  /* Introrij van "Over ons": tekst links, portret rechts. De kop staat ook in
+     de HTML als eerste, zodat een gestapeld scherm en een schermlezer dezelfde
+     volgorde krijgen als het oog. Zie de opmerking in over-ons.html.        */
+  .split--intro { grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; }
   .split--half { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
 
   .masthead__inner { padding-block: 6px; }
   .nav ul { gap: 0 22px; }
-}
-
-@media (min-width: 1000px) {
-  .shot--hero { aspect-ratio: 100 / 30; }
 }
 
 /* ==========================================================================
@@ -660,6 +880,21 @@ strong { font-weight: 700; color: var(--ink); }
 .tbl th, .tbl td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); line-height: 1.45; }
 .tbl th { font-family: "Archivo Narrow", sans-serif; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--eyebrow); }
 .tbl td:last-child, .tbl th:last-child { padding-right: 0; }
+
+/* Variant voor tabellen waarvan de EERSTE KOLOM hele zinnen bevat in plaats
+   van korte labels — artikel 10 ("wat je in welke situatie terugkrijgt") en
+   de gegevenstabel in artikel 13. Het kapitaallabel van dit ontwerp is
+   gemaakt voor één of twee woorden; een rijkop van tien woorden in kapitaal
+   leest merkbaar trager en verliest de woordvormen waarop je oog stuurt.
+   De kolomkoppen blijven wél kapitaal — die zijn kort en dragen het ritme
+   van het stembiljet.                                                      */
+.tbl--zinnen tbody th {
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--ink);
+}
 
 /* Notitieblok voor Frits — verdwijnt vóór publicatie. */
 .note { border: 2px dashed #c9821f; background: #fdf3e2; padding: 18px 20px; margin: 18px 0; }

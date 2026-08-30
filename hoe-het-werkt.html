@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hoe het werkt — Bierfunding</title>
-<meta name="description" content="Van je plek reserveren tot je pakket ophalen: de hele route, en waarom je in twee keer betaalt.">
+<meta name="description" content="Van je aanmelding tot je pakket ophalen: de hele route, en waarom je in twee keer betaalt.">
 <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/archivo-narrow-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=1">
+<link rel="stylesheet" href="css/site.css?v=6">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#1b3a5c">
 </head>
@@ -24,7 +24,16 @@
 
 <header class="masthead">
   <div class="wrap masthead__inner">
-    <a class="brand" href="index.html">BIERFUNDING</a>
+    <a class="brand" href="index.html">
+      <!-- Het CO&CO-beeldmerk. alt="" met opzet: logo en woord vormen samen
+           één link naar de homepage, en die heeft één toegankelijke naam
+           nodig — "BIERFUNDING". Zou het logo een eigen alt-tekst krijgen,
+           dan leest een schermlezer op élke pagina "CO&CO Craft Beers
+           Bierfunding, link". Dat CO&CO erachter zit staat in de voettekst
+           van elke pagina in gewone tekst. -->
+      <img class="brand__logo" src="img/coco-logo-wit.png" width="92" height="78" alt="">
+      <span>BIERFUNDING</span>
+    </a>
     <nav class="nav" aria-label="Hoofdmenu">
       <ul>
         <li><a href="hoe-het-werkt.html" aria-current="page">Hoe het werkt</a></li>
@@ -41,7 +50,7 @@
   <section class="band band--rule-b">
     <div class="wrap">
       <span class="label">Hoe het werkt</span>
-      <h1 style="margin-top:10px">Van je plek reserveren tot je eigen bier in de kast</h1>
+      <h1 style="margin-top:10px">Van je aanmelding tot je eigen bier in de kast</h1>
       <p class="lead" style="max-width:56ch">Bierfunding is één avond en één beslissing, met een pakket bier als uitkomst. Hieronder staat de hele route: wat er gebeurt, wanneer je betaalt, en wat je daarvoor terugkrijgt.</p>
     </div>
   </section>
@@ -76,19 +85,22 @@
     </div>
   </section>
 
-  <figure class="shot shot--wide">
-    <p><b>Breedbeeldfoto</b> de tafel in de brouwerij: glazen, mensen in gesprek</p>
-    <!-- FOTO KLAAR? Verwijder de <p> hierboven en haal onderstaande <img> uit
-         commentaar. Je hebt alleen .jpg-bestanden nodig. Wil je er webp of avif
-         bij, zie README.md stap 4 — doe dat pas als die bestanden er echt staan,
-         anders blijft de foto leeg.
-    <img src="img/avond-1200.jpg"
-         srcset="img/avond-800.jpg 800w, img/avond-1200.jpg 1200w, img/avond-1800.jpg 1800w"
-         sizes="100vw"
-         width="1800" height="900"
-         alt="Deelnemers rond de proeftafel in de brouwerij, met glazen voor zich."
+  <!-- Sfeerbeeld bij "De avond zelf". Het is geen foto van Wijthmen — dat
+       staat daarom niet in de alt-tekst en het bijschrift zegt het erbij.
+       Zelfde regel als bij de foto van Coen & Coers, die bij Brouwerij Allema
+       is gemaakt. De uitsnede is bewust: op het krijtbord dat in het origineel
+       vooraan op tafel ligt staat "Zwolse Speciaalbier Proeverij" met zes
+       bierstijlen, en dat is een ander evenement dan dit. Het bord ligt
+       onder de onderrand van de uitsnede; de mensen en het proefplankje —
+       waar het om gaat — staan er juist groter op. Zie img/LEESMIJ.txt. -->
+  <figure class="shot shot--wide shot--band">
+    <img src="img/proefavond-1200.jpg"
+         srcset="img/proefavond-480.jpg 480w, img/proefavond-800.jpg 800w, img/proefavond-1200.jpg 1200w, img/proefavond-1800.jpg 1800w"
+         sizes="(min-width: 1000px) 1000px, 100vw"
+         width="1800" height="700"
+         alt="Zes mensen rond een houten tafel in een proeflokaal, lachend en in gesprek. Voor hen staat een proefplankje met vijf bierglazen, een plank met kaas en worst, en notitieblaadjes."
          loading="lazy" decoding="async">
-    -->
+    <figcaption>Proeven, praten en samen kiezen. Sfeerbeeld — bij ons proef je op de plek waar het bier gemaakt wordt.</figcaption>
   </figure>
 
   <section class="band band--paper band--ruled" aria-labelledby="betalen">
@@ -101,18 +113,18 @@
           <span class="label">Betaling 1 · vooraf</span>
           <span class="tier__size">Je plek</span>
           <span class="tier__price"><span class="fill">[€ XX]</span></span>
-          <p>Voor de avond zelf: vier proefbrouwsels, uitleg bij elk, en je stem. Dit bedrag staat los van het bier dat er later uit komt — je koopt een avond, geen krat vooruit. Reserveren gaat via de <a href="https://coco-craftbeers.nl" rel="noopener">CO&amp;CO-webshop</a>.</p>
+          <p>Voor de avond zelf: vier proefbrouwsels, uitleg bij elk, en je stem. Dit bedrag staat los van het bier dat er later uit komt — je koopt een avond, geen krat vooruit. Aanmelden gaat via de <a href="https://coco-craftbeers.nl" rel="noopener">CO&amp;CO-webshop</a>.</p>
         </div>
         <div class="tier tier--pick">
           <span class="flag">Na de stemming</span>
           <span class="label">Betaling 2 · achteraf</span>
           <span class="tier__size">Je pakket</span>
           <span class="tier__price"><span class="fill">[€ XX – € XX]</span></span>
-          <p>Pas als de uitslag bekend is, kies je hoeveel je van het winnende bier afneemt: small, medium of large. Die bestellingen samen betalen het brouwsel. <span class="fill fill--long">[Is een pakket kiezen verplicht, of mag je ook alleen de avond doen?]</span></p>
+          <p>Pas als de uitslag bekend is, bestel je je pakket van het winnende bier: small, medium of large. Die bestellingen samen betalen het brouwsel. Je betaalt pas nadat wij bevestigen dat er genoeg besteld is — de helft direct, de andere helft als je je pakket ophaalt. Als deelnemer betaal je voor je pakket minder dan de gewone webshopprijs; wil je er later méér van, dan geldt de consumentenprijs. <span class="fill fill--long">[Is een pakket bestellen verplicht, of mag je ook alleen de avond doen?]</span></p>
         </div>
       </div>
 
-      <p class="small" style="margin-top:22px">Wat er gebeurt als er te weinig pakketten worden besteld om de ketel te vullen, staat op de <a href="voorwaarden.html">voorwaardenpagina</a>.</p>
+      <p style="margin-top:22px">Er geldt een <strong>minimumaantal bestellingen</strong>. Zijn er vóór <span class="fill">[uiterste datum]</span> minimaal <span class="fill">[aantal]</span> pakketten besteld, dan gaat het brouwsel door. Worden dat er minder, dan brouwen we niet. Voor je pakket heb je dan nog niets betaald; wat je voor de proefavond betaalde blijft staan, want die avond is geweest. De termijnen staan op de <a href="voorwaarden.html">voorwaardenpagina</a>.</p>
     </div>
   </section>
 
@@ -130,13 +142,13 @@
         <li>
           <span class="label">Daarna</span>
           <h3>We brouwen — bij Brouwerij Allema in Zwolle</h3>
-          <p>In onze eigen brouwerij in Wijthmen passen vier proefbrouwsels, geen tientallen pakketten. Het winnende bier brouwen we daarom op groot formaat bij <strong>Brouwerij Allema</strong> in Zwolle. Wijthmen is waar gekozen wordt, Zwolle is waar het gebrouwen wordt.</p>
-          <p>Vergisten en rijpen kost <span class="fill">[X weken]</span>, afhankelijk van het biertype. Ondertussen houden we je op de hoogte <span class="fill fill--long">[via e-mail? via een appgroep?]</span>.</p>
+          <p>In onze eigen brouwerij passen vier proefbrouwsels, geen tientallen pakketten. Het winnende bier brouwen we daarom op groot formaat bij <strong>Brouwerij Allema</strong> in Zwolle. Bij ons wordt gekozen, bij Allema wordt op groot formaat gebrouwen.</p>
+          <p>Vergisten en rijpen kost <span class="fill">[X weken]</span>, afhankelijk van het biertype. Ondertussen houden we je per e-mail op de hoogte van hoe het ervoor staat.</p>
         </li>
         <li>
           <span class="label">Tot slot</span>
-          <h3>Ophalen in Wijthmen</h3>
-          <p>Zodra het op fles zit, hoor je wanneer je het kunt ophalen <span class="fill fill--long">[ophalen in Wijthmen, of ook verzenden?]</span>. Het bier dat je meeneemt is het bier dat jij hebt gekozen — dat drinkt anders.</p>
+          <h3>Ophalen bij de brouwerij</h3>
+          <p>Zodra het op fles zit, hoor je wanneer je het kunt komen halen. Ophalen doe je bij de brouwerij; we verzenden niet, dus er zijn ook geen bezorgkosten. Neem je bestelbevestiging en je legitimatie mee. Het bier dat je meeneemt is het bier dat jij hebt gekozen — dat drinkt anders.</p>
         </li>
       </ol>
     </div>
@@ -148,9 +160,10 @@
       <div class="split split--half" style="margin-top:20px">
         <div>
           <h3>Waar en wanneer</h3>
-          <p class="small">Onze brouwerij in Wijthmen, <span class="fill">[adres]</span>.<br>
+          <p class="small">Bij onze eigen brouwerij, <span class="fill fill--long">[precieze plek en adres]</span>.<br>
             <span class="fill">[Datum]</span>, inloop vanaf <span class="fill">[tijd]</span>, we beginnen om <span class="fill">[tijd]</span>.<br>
             Parkeren: <span class="fill fill--long">[hoe werkt dat ter plekke?]</span></p>
+          <p class="small">Of we binnen zitten of buiten bij de brouwerij hangt af van hoe groot de groep wordt. Waar we precies afspreken hoor je bij je aanmelding.</p>
           <h3 style="margin-top:22px">Wat is inbegrepen</h3>
           <p class="small">Vier proefbrouwsels met uitleg, en <span class="fill fill--long">[iets te eten erbij? water? een glas mee naar huis?]</span>. Je pakket bier komt daar los bij.</p>
         </div>
@@ -171,7 +184,7 @@
       <h2>Meedoen aan de eerste ronde?</h2>
       <p style="margin-bottom:22px">Er zijn <span class="fill">[X]</span> plekken. Vol is vol.</p>
       <p class="cta">
-        <a class="btn" href="https://coco-craftbeers.nl" rel="noopener">Reserveer je plek — <span class="fill">[€ XX]</span></a>
+        <a class="btn" href="https://coco-craftbeers.nl" rel="noopener">Meld je aan — <span class="fill">[€ XX]</span></a>
         <a class="btn btn--ghost" href="kandidaten.html">Bekijk eerst de kandidaten</a>
       </p>
     </div>

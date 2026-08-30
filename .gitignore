@@ -1,10 +1,17 @@
-# Originele foto's van Frits — blijven lokaal, gaan niet mee naar de publieke repo.
-# De site gebruikt uitsluitend de geoptimaliseerde varianten (kandidaat-*, coen-coers-*, header-*).
+# Originele foto's en logo's van Frits — blijven lokaal, gaan niet mee naar de
+# publieke repo.
+# De site gebruikt uitsluitend de geoptimaliseerde varianten (kandidaat-*, coen-coers-*,
+# proefglazen-*, brouwerij-*, proefavond-*, coco-logo-wit.png).
 img/bier-1.jpg
 img/bier-2.jpg
 img/bier-3.jpg
 img/bier-4.jpg
 img/header.jpg
+img/proefglazen v2.jpg
+img/proefglazen-v2.jpg
 img/co_en_co.jpeg
+img/brouwerij-wythem.jpeg
+img/hoe-het-werkt.jpg
+img/Logo ondertitel wit.png
 
 .DS_Store

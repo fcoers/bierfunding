@@ -7,7 +7,7 @@
 <meta name="description" content="De vier proefbrouwsels waaruit de eerste ronde kiest: een saison, een stout, een tripel en een weizen.">
 <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/archivo-narrow-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=1">
+<link rel="stylesheet" href="css/site.css?v=6">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#1b3a5c">
 </head>
@@ -24,7 +24,16 @@
 
 <header class="masthead">
   <div class="wrap masthead__inner">
-    <a class="brand" href="index.html">BIERFUNDING</a>
+    <a class="brand" href="index.html">
+      <!-- Het CO&CO-beeldmerk. alt="" met opzet: logo en woord vormen samen
+           één link naar de homepage, en die heeft één toegankelijke naam
+           nodig — "BIERFUNDING". Zou het logo een eigen alt-tekst krijgen,
+           dan leest een schermlezer op élke pagina "CO&CO Craft Beers
+           Bierfunding, link". Dat CO&CO erachter zit staat in de voettekst
+           van elke pagina in gewone tekst. -->
+      <img class="brand__logo" src="img/coco-logo-wit.png" width="92" height="78" alt="">
+      <span>BIERFUNDING</span>
+    </a>
     <nav class="nav" aria-label="Hoofdmenu">
       <ul>
         <li><a href="hoe-het-werkt.html">Hoe het werkt</a></li>
@@ -206,7 +215,6 @@
         <p>Aan het eind van de avond krijgt iedereen één stembiljet. Je zet één kruisje. Geen punten verdelen, geen tweede voorkeur — één stem, want anders wint altijd het bier waar niemand tegen is.</p>
         <p>We tellen de stemmen ter plekke en hardop. Je weet die avond dus welk bier we gaan brouwen, en je hebt gezien hoe die uitslag tot stand kwam.</p>
         <p><span class="fill fill--long">[Wat gebeurt er bij een gelijk aantal stemmen? Bijvoorbeeld: een tweede ronde tussen de twee koplopers, of de brouwers hakken de knoop door.]</span></p>
-        <p class="small">De bieren die het niet worden, verdwijnen niet. <span class="fill fill--long">[Komen afvallers in een volgende ronde terug?]</span></p>
       </div>
 
       <div class="ballot">
@@ -229,7 +237,7 @@
       <h2>Wil je meebeslissen?</h2>
       <p style="margin-bottom:22px">Alleen wie erbij is, stemt mee. Er zijn <span class="fill">[X]</span> plekken voor <span class="fill">[DATUM]</span>.</p>
       <p class="cta">
-        <a class="btn" href="https://coco-craftbeers.nl" rel="noopener">Reserveer je plek — <span class="fill">[€ XX]</span></a>
+        <a class="btn" href="https://coco-craftbeers.nl" rel="noopener">Meld je aan — <span class="fill">[€ XX]</span></a>
         <a class="btn btn--ghost" href="hoe-het-werkt.html">Hoe het verder gaat</a>
       </p>
     </div>

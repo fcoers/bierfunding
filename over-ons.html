@@ -7,7 +7,7 @@
 <meta name="description" content="Coen en Coers brouwen in Wijthmen. Bierfunding is hun manier om het bier te laten kiezen door de mensen die het drinken.">
 <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/archivo-narrow-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=1">
+<link rel="stylesheet" href="css/site.css?v=6">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#1b3a5c">
 </head>
@@ -24,7 +24,16 @@
 
 <header class="masthead">
   <div class="wrap masthead__inner">
-    <a class="brand" href="index.html">BIERFUNDING</a>
+    <a class="brand" href="index.html">
+      <!-- Het CO&CO-beeldmerk. alt="" met opzet: logo en woord vormen samen
+           één link naar de homepage, en die heeft één toegankelijke naam
+           nodig — "BIERFUNDING". Zou het logo een eigen alt-tekst krijgen,
+           dan leest een schermlezer op élke pagina "CO&CO Craft Beers
+           Bierfunding, link". Dat CO&CO erachter zit staat in de voettekst
+           van elke pagina in gewone tekst. -->
+      <img class="brand__logo" src="img/coco-logo-wit.png" width="92" height="78" alt="">
+      <span>BIERFUNDING</span>
+    </a>
     <nav class="nav" aria-label="Hoofdmenu">
       <ul>
         <li><a href="hoe-het-werkt.html">Hoe het werkt</a></li>
@@ -39,7 +48,17 @@
 <main id="hoofd">
 
   <section class="band band--rule-b">
-    <div class="wrap split split--duo">
+    <!-- De kop staat bewust vóór de foto in de HTML. Op smal scherm stapelt
+         deze rij, en dan is de eerste regel van de pagina de kop en niet een
+         foto. Dat geldt ook voor een schermlezer en voor toetsenbordnavigatie.
+         Dat de foto op breed scherm rechts staat, regelt de rasterindeling —
+         niet order of een omgekeerde HTML-volgorde. -->
+    <div class="wrap split split--intro">
+      <div>
+        <span class="label">Over ons</span>
+        <h1 style="margin-top:10px">Wij zijn Coen &amp; Coers</h1>
+        <p class="lead">Twee brouwers, één hobbybrouwerij in Wijthmen, en <span class="fill">[X]</span> jaar recepten uitproberen op vrienden en familie. Bierfunding is wat daaruit gekomen is.</p>
+      </div>
       <figure class="shot shot--duo">
         <img src="img/coen-coers-480.jpg"
              srcset="img/coen-coers-320.jpg 320w, img/coen-coers-480.jpg 480w, img/coen-coers-640.jpg 640w"
@@ -49,11 +68,6 @@
              fetchpriority="high" decoding="async">
         <figcaption>Bij Brouwerij Allema in Zwolle, waar het winnende bier op groot formaat wordt gebrouwen.</figcaption>
       </figure>
-      <div>
-        <span class="label">Over ons</span>
-        <h1 style="margin-top:10px">Wij zijn Coen &amp; Coers</h1>
-        <p class="lead">Twee brouwers, één hobbybrouwerij in Wijthmen, en <span class="fill">[X]</span> jaar recepten uitproberen op vrienden en familie. Bierfunding is wat daaruit gekomen is.</p>
-      </div>
     </div>
   </section>
 
@@ -86,24 +100,19 @@
       <div class="split split--half">
         <div>
           <h2 id="brouwerij">De brouwerij in Wijthmen</h2>
-          <p>Het is geen fabriek. Het is <span class="fill fill--long">[wat het is — een schuur, een garage, een oude stal?]</span> met <span class="fill">[X]</span> ketels, een koelcel en net genoeg ruimte om er met <span class="fill">[X]</span> mensen omheen te staan. Op proefavonden zetten we de tafel middenin, tussen de installatie.</p>
-          <p>Dat is bewust. Je proeft het bier op de plek waar het gemaakt wordt, met de ketels naast je waarin het straks gaat. Dat is iets anders dan vier glazen op een café-terras.</p>
+          <p>Het is geen fabriek. Het is <span class="fill fill--long">[wat het is — een schuur, een garage, een oude stal?]</span> met <span class="fill">[X]</span> ketels, een koelcel en net genoeg ruimte om er met <span class="fill">[X]</span> mensen omheen te staan. Op een proefavond zetten we de tafel ertussen — of buiten bij de brouwerij, als de groep dat vraagt.</p>
+          <p>Dat is bewust. Je proeft het bier op de plek waar het gemaakt wordt, bij de ketels waarin het straks gaat. Dat is iets anders dan vier glazen op een café-terras.</p>
           <p>Groot brouwen doen we hier niet; daar is de installatie te klein voor. Het winnende bier brouwen we op groot formaat bij <strong>Brouwerij Allema</strong> in Zwolle. Zo blijft de avond klein en het brouwsel toch groot genoeg voor iedereen die meedoet.</p>
-          <p class="small">Wijthmen ligt <span class="fill fill--long">[X minuten vanaf Zwolle — en hoe je er komt]</span>. Het adres krijg je bij je reservering.</p>
+          <p class="small">Wijthmen ligt <span class="fill fill--long">[X minuten vanaf Zwolle — en hoe je er komt]</span>. Het adres en de precieze plek krijg je bij je aanmelding.</p>
         </div>
         <figure class="shot shot--wide">
-          <p><b>Foto</b> de installatie: ketels, slangen, de koelcel</p>
-          <!-- FOTO KLAAR? Verwijder de <p> hierboven en haal onderstaande <img> uit
-               commentaar. Je hebt alleen .jpg-bestanden nodig. Wil je er webp of avif
-               bij, zie README.md stap 4 — doe dat pas als die bestanden er echt staan,
-               anders blijft de foto leeg.
-          <img src="img/installatie-1200.jpg"
-               srcset="img/installatie-800.jpg 800w, img/installatie-1200.jpg 1200w, img/installatie-1800.jpg 1800w"
-               sizes="(min-width: 760px) 470px, 100vw"
-               width="1200" height="600"
-               alt="De brouwinstallatie: ketels, slangen en de koelcel."
+          <img src="img/brouwerij-800.jpg"
+               srcset="img/brouwerij-480.jpg 480w, img/brouwerij-800.jpg 800w, img/brouwerij-1200.jpg 1200w"
+               sizes="(min-width: 1000px) 440px, (min-width: 760px) 45vw, 100vw"
+               width="1200" height="800"
+               alt="De hobbybrouwerij in Wijthmen: een garage met een dampende brouwketel op een verrijdbaar onderstel, twee statafels met ingeschonken proefglazen, gistvaten, emmers en bierkratten, en een werkbank met gereedschap tegen de witte muur."
                loading="lazy" decoding="async">
-          -->
+          <figcaption>Onze eigen brouwerij in Wijthmen: hier wordt gebrouwen, en hier proeven we ook.</figcaption>
         </figure>
       </div>
     </div>
@@ -113,8 +122,8 @@
     <div class="wrap split split--half">
       <div>
         <h2 id="coco">Hoe Bierfunding en CO&amp;CO samenhangen</h2>
-        <p>Bierfunding is geen apart bedrijf. Het is wat wij als CO&amp;CO Craft Beers doen náást de gewone flessen. Je reserveert je plek in de <a href="https://coco-craftbeers.nl" rel="noopener">CO&amp;CO-webshop</a>, je bestelt je pakket daar, en het bier dat eruit komt draagt ons etiket.</p>
-        <p class="small"><span class="fill fill--long">[Komt het winnende bier daarna ook gewoon in de webshop te koop, of blijft het voor de deelnemers?]</span></p>
+        <p>Bierfunding is geen apart bedrijf. Het is wat wij als CO&amp;CO Craft Beers doen náást de gewone flessen. Je meldt je aan via de <a href="https://coco-craftbeers.nl" rel="noopener">CO&amp;CO-webshop</a>, je bestelt je pakket daar, en het bier dat eruit komt draagt ons etiket.</p>
+        <p class="small">Gaat het brouwsel door, dan koopt CO&amp;CO wat er ná alle pakketten overblijft zelf en verkoopt dat via de eigen webshop. Het bier dat op de avond gekozen is, is daarna dus ook gewoon te koop.</p>
       </div>
       <div>
         <h2>Contact</h2>
@@ -136,7 +145,7 @@
       <h2>Kom eens langs</h2>
       <p style="margin-bottom:22px">De eerste ronde is op <span class="fill">[DATUM]</span>. Er zijn <span class="fill">[X]</span> plekken.</p>
       <p class="cta">
-        <a class="btn" href="https://coco-craftbeers.nl" rel="noopener">Reserveer je plek — <span class="fill">[€ XX]</span></a>
+        <a class="btn" href="https://coco-craftbeers.nl" rel="noopener">Meld je aan — <span class="fill">[€ XX]</span></a>
         <a class="btn btn--ghost" href="kandidaten.html">Bekijk de kandidaten</a>
       </p>
     </div>
