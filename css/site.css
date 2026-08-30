@@ -1,0 +1,681 @@
+/* ==========================================================================
+   bierfunding.nl — één stylesheet, geen build-stap, geen framework.
+   Ontwerp: "stembiljet" (B-Stembiljet.dc.html, goedgekeurd 2026-08-30).
+   Mobiel-first: de basisregels gelden voor de kleinste schermen,
+   media-queries voegen alleen toe.
+   ========================================================================== */
+
+/* --- Lettertypen: zelf gehost, geen verzoek naar Google -------------------
+   Twee variabele woff2-bestanden, samen 52 KB. Archivo dekt gewicht
+   400-800 uit één bestand; Archivo Narrow doet de labels in kapitaal.     */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo-latin.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo Narrow";
+  src: url("../fonts/archivo-narrow-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Ontwerptokens -------------------------------------------------------
+   De kleuren komen uit het goedgekeurde ontwerp. Drie tinten zijn een
+   fractie donkorder gezet zodat alle tekst op WCAG-AA uitkomt; de
+   verhouding tot de rest van het palet blijft gelijk.                     */
+
+:root {
+  --ink:        #12263a;  /* koppen                                        */
+  --navy:       #1b3a5c;  /* merk, kaders, knoppen                         */
+  --body:       #3d4f60;  /* lopende tekst          — 8.1:1 op crème       */
+  --muted:      #5a6d80;  /* bijschrift             — 5.1:1 op crème       */
+  --eyebrow:    #786850;  /* kapitaallabels         — 5.2:1 op crème       */
+  --amber:      #e8a33d;  /* accent, alleen sparend gebruikt               */
+
+  --cream:      #fdfaf4;  /* paginavlak                                    */
+  --cream-2:    #f4ede0;  /* afwisselende band                             */
+  --warm:       #fdf6e8;  /* uitgelicht vlak                               */
+  --paper:      #ffffff;
+
+  --rule:       #e2d9c8;  /* dunne scheiding                               */
+  --rule-2:     #d8cdb8;  /* kaderlijn                                     */
+  --shot-bg:    #e8ddc8;  /* fotoplaatshouder                              */
+  --shot-ink:   #6b5a3a;  /* tekst daarin           — 5.0:1                */
+
+  --measure: 1000px;      /* de breedte uit het ontwerp                    */
+  --gutter: clamp(20px, 5vw, 40px);
+  --rule-heavy: 3px solid var(--navy);
+}
+
+/* --- Basis --------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--body);
+  font-family: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.0625rem;          /* 17px — ruim leesbaar, ook op afstand   */
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2.125rem, 8vw, 3.5rem); letter-spacing: -0.03em; line-height: 1.04; }
+h2 { font-size: clamp(1.5rem, 4.6vw, 1.875rem); }
+h3 { font-size: 1.1875rem; letter-spacing: -0.01em; }
+
+p { margin: 0 0 1em; max-width: 62ch; }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+ul, ol { margin: 0 0 1em; padding-left: 1.25em; }
+li { margin-bottom: 0.4em; max-width: 60ch; }
+
+strong { font-weight: 700; color: var(--ink); }
+
+/* Zichtbare focus. Nooit weghalen: dit is de enige wegwijzer voor wie
+   met het toetsenbord navigeert.                                          */
+:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 2px;
+}
+.masthead :focus-visible,
+.sitefoot :focus-visible { outline-color: var(--amber); }
+
+/* Wij animeren vrijwel niets. Wat er is, is een overgang van 150 ms op
+   hover/focus — en ook die zetten we uit als het besturingssysteem
+   daarom vraagt.                                                          */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Hulpklassen --------------------------------------------------------- */
+
+.wrap {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--amber);
+  color: var(--ink);
+  padding: 14px 20px;
+  font-weight: 700;
+  z-index: 20;
+}
+.skip:focus { left: 0; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Kapitaallabel in Archivo Narrow — het "formulierstempel" van dit ontwerp */
+.label {
+  display: block;
+  font-family: "Archivo Narrow", "Archivo", sans-serif;
+  font-size: 0.9375rem;          /* 15px — de ondergrens in dit ontwerp    */
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--eyebrow);
+  text-transform: uppercase;
+}
+
+.lead { font-size: clamp(1.0625rem, 2.6vw, 1.1875rem); line-height: 1.55; color: var(--body); }
+.small { font-size: 0.9375rem; line-height: 1.5; color: var(--muted); }
+
+/* --- Banden -------------------------------------------------------------- */
+/* Achtergronden lopen door tot de schermrand, de inhoud blijft op 1000 px. */
+
+.band { padding-block: clamp(32px, 7vw, 44px); }
+.band--paper  { background: var(--paper); }
+.band--warm   { background: var(--cream-2); }
+.band--ruled  { border-top: var(--rule-heavy); border-bottom: var(--rule-heavy); }
+.band--rule-b { border-bottom: var(--rule-heavy); }
+
+.band__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 20px;
+  margin-bottom: 22px;
+}
+.band__head h2 { margin: 0; }
+.band__head a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+
+/* --- Kop met navigatie ---------------------------------------------------- */
+
+.masthead { background: var(--navy); }
+
+.masthead__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 24px;
+  padding-block: 10px;
+}
+
+.brand {
+  font-size: 1.1875rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-decoration: none;
+  padding-block: 10px;
+  display: inline-block;
+}
+.brand:hover { color: var(--amber); }
+
+.nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav li { margin: 0; }
+.nav a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;               /* ruime aanraakzone                     */
+  font-size: 0.9375rem;
+  color: #b8cde0;                 /* 7.1:1 op de marineband                */
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.nav a:hover { color: #fff; border-bottom-color: #4d6e91; }
+.nav a[aria-current="page"] { color: #fff; border-bottom-color: var(--amber); }
+
+/* --- Knoppen -------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 28px;
+  background: var(--navy);
+  color: #fff;                    /* 11.6:1                                */
+  font-size: 1.0625rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 3px solid var(--navy);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+.btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--navy);
+}
+.btn--ghost:hover { background: var(--navy); color: #fff; }
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+}
+.cta .small { max-width: 34ch; margin: 0; }
+
+/* --- Fotoplaatshouder ------------------------------------------------------
+   Eén blok per foto. Zodra het bestand er is: het <picture>-blok eronder
+   uit commentaar halen en de plaatshouder-alinea weghalen.                */
+
+.shot {
+  margin: 0;
+  width: 100%;
+  background: var(--shot-bg);
+  border: 2px dashed #c2ad86;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  text-align: center;
+}
+.shot > p {
+  margin: 0;
+  max-width: 40ch;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--shot-ink);         /* 5.0:1 op het crèmevlak                */
+}
+.shot > p b {
+  display: block;
+  font-family: "Archivo Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--shot-ink);
+  margin-bottom: 4px;
+}
+.shot img { width: 100%; height: auto; }
+.shot figcaption {
+  padding-top: 10px;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--muted);
+  text-align: left;
+}
+.shot:has(img) {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  min-height: 0;
+  aspect-ratio: auto;
+  display: block;
+}
+
+.shot--hero  { aspect-ratio: 16 / 7; }
+.shot--wide  { aspect-ratio: 16 / 8; }
+.shot--glass { aspect-ratio: 1 / 1; }
+.shot--duo   { aspect-ratio: 3 / 4; max-width: 320px; }
+
+/* --- Plaatshouders voor tekst ----------------------------------------------
+   Alles wat Frits nog moet invullen staat tussen rechte haken. De haken
+   zijn het signaal; de amberkleur is een tweede, niet het enige.          */
+
+.fill {
+  background: #fdeacb;
+  border-bottom: 2px dotted #c9821f;
+  color: var(--ink);
+  font-weight: 700;
+  padding: 0 3px;
+  /* Bewust géén white-space: nowrap. Een lange plaatshouder zou dan buiten
+     het scherm steken; dit moet ook blijven kloppen als Frits er later een
+     langere tekst in zet. */
+  overflow-wrap: break-word;
+}
+.fill--long { font-weight: 500; }
+
+.fill-block {
+  border: 2px dashed #c9821f;
+  background: #fdf3e2;
+  padding: 18px 20px;
+  margin: 0 0 20px;
+}
+.fill-block > :last-child { margin-bottom: 0; }
+.fill-block .label { color: #8a5a12; margin-bottom: 6px; }
+
+/* Conceptbalk — één blok per pagina, weghalen vóór publicatie.            */
+.draft {
+  background: var(--amber);
+  color: var(--ink);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+.draft .wrap { padding-block: 10px; }
+.draft p { margin: 0; max-width: none; }
+
+/* --- Stembiljet ------------------------------------------------------------ */
+
+.ballot {
+  border: 3px solid var(--navy);
+  background: var(--paper);
+}
+.ballot__head {
+  background: var(--navy);
+  padding: 10px 14px;
+}
+.ballot__head .label { color: #fff; letter-spacing: 0.06em; }
+.ballot ol { list-style: none; margin: 0; padding: 4px 0; }
+.ballot li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 13px 14px;
+  max-width: none;
+  border-bottom: 1px solid var(--rule);
+  font-size: 1.0625rem;
+  color: var(--ink);
+}
+.ballot li:last-child { border-bottom: 0; }
+.ballot__foot {
+  padding: 11px 14px;
+  background: var(--warm);
+  border-top: 2px solid var(--navy);
+}
+.ballot__foot p { margin: 0; font-size: 0.9375rem; line-height: 1.45; color: var(--shot-ink); }
+
+.tick {
+  width: 18px; height: 18px;
+  border: 2px solid var(--navy);
+  flex-shrink: 0;
+}
+.tick--lg { width: 24px; height: 24px; }
+
+/* --- Rasters ---------------------------------------------------------------- */
+
+.grid { display: grid; gap: 18px; }
+/* Zonder min-width: 0 mag een rastercel groeien tot de breedte van haar
+   inhoud, en duwt één breed element de hele pagina scheef. */
+.grid > *, .split > *, .steps > * { min-width: 0; }
+
+/* Stappen: op mobiel onder elkaar met een dunne scheiding, op breed vier
+   kolommen zoals in het ontwerp.                                          */
+.steps {
+  list-style: none;
+  margin-inline: auto;
+  padding: 0;
+  max-width: var(--measure);
+  background: var(--paper);
+  display: grid;
+}
+.steps > li {
+  margin: 0;
+  max-width: none;
+  padding: 24px var(--gutter);
+  border-bottom: 1px solid var(--rule);
+}
+.steps > li:last-child { border-bottom: 0; background: var(--warm); }
+.steps h3 { margin: 8px 0 6px; font-weight: 700; }
+.steps p { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--body); }
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+}
+.card__body { padding: 16px; display: flex; flex-direction: column; gap: 7px; }
+.card__kind {
+  font-size: 0.9375rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--eyebrow);
+}
+.card__name { font-size: 1.1875rem; font-weight: 700; color: var(--ink); line-height: 1.15; }
+.card p { margin: 0; font-size: 0.9375rem; line-height: 1.5; }
+
+/* Pakketten */
+.tier {
+  border: 2px solid var(--rule-2);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--paper);
+}
+.tier__size { font-size: 2.125rem; font-weight: 800; color: var(--ink); line-height: 1; letter-spacing: -0.02em; }
+.tier__price { font-size: 1.1875rem; font-weight: 700; color: var(--navy); }
+.tier p { margin: 0; font-size: 0.9375rem; line-height: 1.5; }
+.tier--pick {
+  border: 3px solid var(--navy);
+  background: var(--warm);
+  position: relative;
+  padding: 21px;
+  margin-top: 14px;
+}
+.tier--pick .flag {
+  position: absolute;
+  top: -13px; left: 21px;
+  background: var(--amber);
+  color: var(--ink);              /* 7.1:1 op amber                        */
+  font-family: "Archivo Narrow", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+}
+
+/* Kandidaat, uitgebreide vorm op de kandidatenpagina */
+.runner {
+  border: 2px solid var(--rule-2);
+  background: var(--paper);
+  display: grid;
+  gap: 0;
+}
+.runner__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 2px solid var(--navy);
+  background: var(--warm);
+}
+.runner__head h3 { margin: 0; }
+.runner__body { padding: 18px; }
+.runner__body > :last-child { margin-bottom: 0; }
+.runner dl { margin: 14px 0 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.runner dt {
+  font-family: "Archivo Narrow", sans-serif;
+  font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--eyebrow);
+  padding: 10px 0 2px;
+}
+.runner dd { margin: 0 0 10px; font-size: 0.9375rem; line-height: 1.5; }
+
+/* Route/tijdlijn op "Hoe het werkt" */
+.route { list-style: none; margin: 0; padding: 0; }
+.route > li {
+  margin: 0;
+  max-width: none;
+  padding: 22px 0 22px 0;
+  border-top: 1px solid var(--rule);
+}
+.route > li:first-child { border-top: 0; padding-top: 0; }
+.route h3 { margin: 6px 0 8px; }
+.route p { font-size: 1rem; }
+
+/* Twee kolommen: tekst naast een blok (stembiljet, foto) */
+.split { display: grid; gap: 28px; align-items: start; }
+
+/* --- Voettekst -------------------------------------------------------------- */
+
+.sitefoot { background: var(--ink); color: #b8cde0; }
+.sitefoot .wrap { padding-block: 24px; }
+.sitefoot p { font-size: 0.9375rem; line-height: 1.5; margin: 0 0 10px; max-width: none; }
+.sitefoot a { color: #b8cde0; }
+.sitefoot a:hover { color: #fff; }
+.sitefoot ul {
+  list-style: none; margin: 0 0 14px; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 0 20px;
+}
+.sitefoot li { margin: 0; }
+.sitefoot li a {
+  display: flex; align-items: center; min-height: 44px;
+  font-size: 0.9375rem; text-decoration: none;
+}
+.sitefoot li a:hover { text-decoration: underline; }
+.sitefoot__legal {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px;
+  border-top: 1px solid #2c4463; padding-top: 16px;
+}
+.sitefoot__legal p { color: #8ea4b8; }   /* 6.0:1 op de donkere band       */
+
+/* 18+-markering. Staat op elke pagina, blokkeert niets.                    */
+.age {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #fff;
+}
+.age b {
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  font-size: 0.9375rem;
+  font-family: "Archivo Narrow", sans-serif;
+  letter-spacing: 0;
+}
+
+/* ==========================================================================
+   Vanaf hier alleen aanvullingen voor grotere schermen.
+   ========================================================================== */
+
+@media (min-width: 560px) {
+  .grid--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shot--hero { aspect-ratio: 16 / 6; }
+}
+
+@media (min-width: 760px) {
+  .band { padding-block: 44px; }
+  .grid--cards { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid--tiers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid--runners { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .steps > li { border-bottom: 0; border-right: 1px solid var(--rule); padding: 28px 24px; }
+  .steps > li:last-child { border-right: 0; }
+  /* Buitenste kolommen lijnen uit met de paginamarge van de andere banden */
+  .steps > li:first-child { padding-left: var(--gutter); }
+  .steps > li:last-child  { padding-right: var(--gutter); }
+
+  .tier--pick { margin-top: 0; }
+
+  .split--hero { grid-template-columns: minmax(0, 1fr) 290px; gap: 52px; }
+  .split--duo  { grid-template-columns: 300px minmax(0, 1fr); gap: 40px; align-items: center; }
+  .split--half { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+
+  .masthead__inner { padding-block: 6px; }
+  .nav ul { gap: 0 22px; }
+}
+
+@media (min-width: 1000px) {
+  .shot--hero { aspect-ratio: 100 / 30; }
+}
+
+/* ==========================================================================
+   Voorwaardenpagina. Lange lopende tekst, ankerbare artikelen.
+   ========================================================================== */
+
+.doc { max-width: 760px; }
+.doc h2 { margin-top: 40px; padding-top: 18px; border-top: 2px solid var(--rule); }
+.doc h2:first-of-type { margin-top: 0; }
+.doc h3 { margin-top: 26px; }
+.doc ul, .doc ol { padding-left: 1.15em; }
+.doc li { margin-bottom: 0.5em; }
+:target { scroll-margin-top: 20px; }
+
+/* Inhoudsopgave */
+.toc {
+  border: 2px solid var(--rule-2);
+  background: var(--paper);
+  padding: 18px 20px;
+  margin-bottom: 32px;
+}
+.toc ol {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  columns: 1;
+}
+.toc li { margin: 0; max-width: none; }
+.toc a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 1rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+.toc a:hover { text-decoration: underline; }
+.toc li:last-child a { border-bottom: 0; }
+.toc a b {
+  display: inline-block;
+  min-width: 2.2em;
+  color: var(--eyebrow);
+  font-family: "Archivo Narrow", sans-serif;
+  font-weight: 600;
+}
+
+/* De twee aankopen naast elkaar. Onderscheid via kader, label en tekst —
+   niet via kleur alleen. */
+.pair { display: grid; gap: 16px; margin: 22px 0; }
+.pair > div { border: 2px solid var(--rule-2); background: var(--paper); padding: 20px; }
+.pair > div.pair--yes { border: 3px solid var(--navy); background: var(--warm); padding: 19px; }
+.pair h3 { margin: 6px 0 10px; }
+.pair p { font-size: 1rem; margin-bottom: 0; }
+.pair .verdict {
+  display: inline-block;
+  font-family: "Archivo Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.9375rem;
+  padding: 5px 12px;
+  margin-bottom: 10px;
+  background: var(--ink);
+  color: #fff;
+}
+.pair .verdict--yes { background: var(--amber); color: var(--ink); }
+
+/* Tabellen: smal genoeg om op een telefoon te blijven passen. */
+.tbl {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: 16px 0 20px;
+  font-size: 0.9375rem;
+  overflow-wrap: break-word;
+}
+.tbl caption { text-align: left; font-size: 0.9375rem; color: var(--muted); margin-bottom: 8px; }
+.tbl th, .tbl td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); line-height: 1.45; }
+.tbl th { font-family: "Archivo Narrow", sans-serif; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--eyebrow); }
+.tbl td:last-child, .tbl th:last-child { padding-right: 0; }
+
+/* Notitieblok voor Frits — verdwijnt vóór publicatie. */
+.note { border: 2px dashed #c9821f; background: #fdf3e2; padding: 18px 20px; margin: 18px 0; }
+.note > :last-child { margin-bottom: 0; }
+.note .label { color: #8a5a12; margin-bottom: 8px; }
+.note p { font-size: 1rem; }
+
+/* Herroepingsknop: wettelijk verplicht en dus opvallend. */
+.revoke { border: 3px solid var(--navy); background: var(--paper); padding: 24px; margin: 22px 0; }
+.revoke h3 { margin-top: 0; }
+.revoke > :last-child { margin-bottom: 0; }
+
+@media (min-width: 620px) {
+  .toc ol { columns: 2; column-gap: 28px; }
+  .toc a { break-inside: avoid; }
+}
+@media (min-width: 760px) {
+  .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

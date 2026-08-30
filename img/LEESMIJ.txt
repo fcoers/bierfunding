@@ -1,0 +1,25 @@
+Foto's.
+
+IN GEBRUIK
+  proefglazen-800 / -1200 / -1800        breedbeeld bovenaan de homepage
+  coen-coers-320 / -480 / -640           Coen & Coers (homepage + over-ons)
+  kandidaat-1-320 / -480 / -640 / -960   glas kandidaat 1 (home + kandidaten)
+  kandidaat-2-... t/m kandidaat-4-...    idem voor 2, 3 en 4
+
+  De vier kandidaatfoto's zijn VOORBEELDFOTO'S. Vervangen door foto's van de
+  echte proefbrouwsels? Maak dezelfde bestandsnamen aan, dan is dat genoeg.
+  Kleurkoppeling nu: 1 goudblond, 2 bijna zwart, 3 amber, 4 troebel lichtgeel.
+  Pas de alt-teksten in de HTML aan als de nieuwe foto's anders zijn.
+
+NOG PLAATSHOUDER — hier staat nu een gekleurd vlak met een beschrijving
+  avond-800 / -1200 / -1800              de proeftafel (hoe-het-werkt)
+  installatie-800 / -1200 / -1800        ketels en koelcel (over-ons)
+
+Altijd .jpg, altijd drie breedtes, grootste variant onder 200 KB.
+Het commando staat in README.md, stap 3.
+
+ORIGINELEN — niet door de site gebruikt, samen 20 MB
+  header.jpg      bron van proefglazen-*
+  co_en_co.jpeg   bron van coen-coers-*
+  bier-1..4.jpg   bron van kandidaat-1..4-*
+Je mag ze uit de repo halen; bewaar ze dan wel ergens anders.

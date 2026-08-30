@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Bierfunding">
+  <rect width="32" height="32" fill="#1b3a5c"/>
+  <rect x="7.5" y="7.5" width="17" height="17" fill="none" stroke="#fdfaf4" stroke-width="2.5"/>
+  <path d="M10.5 16.5 L14.5 20.5 L22 10.5" fill="none" stroke="#e8a33d" stroke-width="3.5" stroke-linecap="square"/>
+</svg>
